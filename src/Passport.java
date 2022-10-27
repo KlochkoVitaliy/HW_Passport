@@ -1,4 +1,4 @@
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 
@@ -8,21 +8,17 @@ public class Passport {
     private final String secName;
     private final int dateOfBirthday;
 
-    private Set <Integer> numberPassport;
+    private int numberPassport;
 
-    public Passport(String name, String firstName, String secName, int dateOfBirthday) {
+    public Passport(String name, String firstName, String secName, int dateOfBirthday, int numberPassport) {
         this.name = name;
         this.firstName = firstName;
         this.secName = secName;
         this.dateOfBirthday = dateOfBirthday;
+        this.numberPassport = numberPassport;
     }
 
-    private void firsMethod(Passport passport, Collection<Integer> collection){              //       ?????????????
-collection.contains(numberPassport);
-
-    }
-
-    public String getName() {
+       public String getName() {
         return name;
     }
 
@@ -36,6 +32,10 @@ collection.contains(numberPassport);
 
     public int getDateOfBirthday() {
         return dateOfBirthday;
+    }
+
+    public int getNumberPassport() {
+        return numberPassport;
     }
 
     @Override
