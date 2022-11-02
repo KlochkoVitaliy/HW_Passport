@@ -1,64 +1,93 @@
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 public class Passport {
-    private final String name;
-    private final String firstName;
-    private final String secName;
-    private final int dateOfBirthday;
+    private String number;
+    private String name;
+    private String surname;
+    private String midName;
+    private LocalDate bornDate;
 
-    private int numberPassport;
-
-    public Passport(String name, String firstName, String secName, int dateOfBirthday, int numberPassport) {
-        this.name = name;
-        this.firstName = firstName;
-        this.secName = secName;
-        this.dateOfBirthday = dateOfBirthday;
-        this.numberPassport = numberPassport;
+    public Passport(String number, String surname, String name, String midName, String bornDate) {
+        if (number == null  && number.isBlank() && !number.matches("\\d{4}\\s\\d{6}")) {
+            throw new IllegalArgumentException();
+        } else {
+            this.number = number;
+        }
+        setName(name);
+        setSurname(surname);
+        setMidName(midName);
+        setBornDate(bornDate);
     }
 
-       public String getName() {
+    public String getNumber() {
+        return number;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setName(String name) {
+        if (name == null  && name.isBlank()) {
+            throw new IllegalArgumentException();
+        } else {
+            this.name = name;
+        }
     }
 
-    public String getSecName() {
-        return secName;
+    public String getSurname() {
+        return surname;
     }
 
-    public int getDateOfBirthday() {
-        return dateOfBirthday;
+    public void setSurname(String surname) {
+        if (surname == null &&  surname.isBlank()) {
+            throw new IllegalArgumentException();
+        } else {
+            this.surname = surname;
+        }
     }
 
-    public int getNumberPassport() {
-        return numberPassport;
+    public String getMidName() {
+        return midName;
     }
+
+    public void setMidName(String midName) {
+        if (midName == null  && midName.isBlank()) {
+            this.midName = "Отсутствует";
+        } else {
+            this.midName = midName;
+        }
+    }
+
+    public LocalDate getBornDate() {
+        return bornDate;
+    }
+
+    public void setBornDate(String bornDate) {
+        if (bornDate == null  && bornDate.isBlank()) {
+            throw new IllegalArgumentException();
+        } else {
+            this.bornDate = LocalDate.parse(bornDate.replace('.', '-'));
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Passport passport = (Passport) o;
-        return dateOfBirthday == passport.dateOfBirthday && Objects.equals(name, passport.name) && Objects.equals(firstName, passport.firstName) && Objects.equals(secName, passport.secName) && Objects.equals(numberPassport, passport.numberPassport);
+        return number.equals(passport.number);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, firstName, secName, dateOfBirthday, numberPassport);
+        return Objects.hash(number);
     }
 
     @Override
     public String toString() {
-        return "Passport{" +
-                "name='" + name + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", secName='" + secName + '\'' +
-                ", dateOfBirthday=" + dateOfBirthday +
-                ", numberPassport=" + numberPassport +
-                '}';
+        return number + ", " + surname + ' ' + name + ' ' + midName + ", " + bornDate;
     }
 }
